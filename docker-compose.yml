@@ -2,47 +2,58 @@ version: '2'
 services:
  web_gui:
   build: ./www/
+  restart: always
   ports:
    - "80:80"
  
  dvwa:
-  image: c0ny1/dvwa:v1.9
+#  image: c0ny1/dvwa:v1.9
+  image:  registry.cn-hangzhou.aliyuncs.com/rapid7/bwa:dvwa
+  container_name: dvwa
+  restart: always
   ports:
    - "81:80"
 
  bwapp:
   image: c0ny1/bwapp:v2.2
+  restart: always
   ports:
    - "82:80"
 
  sqli-labs:
   image: c0ny1/sqli-labs:0.1
+  restart: always
   ports:
    - "83:80"
 
  mutillidae:
   image: c0ny1/mutillidae:v2.6.62
+  restart: always
   ports:
    - "84:80"
  
  bodgelt:
   image: psiinon/bodgeit:latest
+  restart: always
   ports:
    - "85:8080"
 
  wackopicko:
   image: adamdoupe/wackopicko:latest
+  restart: always
   ports:
    - "86:80"
 
  webgoat:
   image: c0ny1/webgoat-server:v8.0.0.M14
+  restart: always
   command: "sh /home/webgoat/start.sh"
   ports:
    - "8080:8080"
 
  webwolf:
   image: c0ny1/webwolf:v8.0.0.M14
+  restart: always
   command: "sh /home/webwolf/start.sh"
   depends_on:
    - webgoat
@@ -51,6 +62,7 @@ services:
 
  Hackademic:
   image: c0ny1/hackademic:master
+  restart: always
   ports:
     - "1664:80"
 
@@ -61,11 +73,13 @@ services:
 
  Xss_challenge_tour:
   image: c0ny1/xss-challenge-tour:latest
+  restart: always
   ports:
    - "8091:80"
 
  dsvw:
   image: c0ny1/dsvw:v0.1m
+  restart: always
   ports:
    - "65412:65412"
 
@@ -87,6 +101,7 @@ services:
  #########################################
  mcir:
   image: andresriancho/mcir:latest
+  restart: always
   ports:
    - "8090:80"
   links:
@@ -97,6 +112,7 @@ services:
    - APACHE_LOG_DIR=/var/log/apache2/
  mysqldb:
   image: mysql
+  restart: always
   environment:
    - MYSQL_ROOT_PASSWORD=mcirpass00112233
    - MYSQL_DATABASE=sqlol
